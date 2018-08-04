@@ -1,0 +1,33 @@
+{
+    "name": "msrana/yo-csv-php",
+    "description": "CSV easy import and export with php",
+    "keywords": ["csv", "php-csv"],
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Salahuddin Rana",
+            "email": "rana7cse@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8 || ^5.0",
+        "symfony/var-dumper": "^3.4"
+    },
+    "autoload" : {
+        "psr-4": {
+            "Rana\\YoCsvPHP\\": "src/"
+        },
+        "files": [
+            "./helper.php"
+        ]
+    },
+    "scripts": {
+        "yo": [
+            "@php test.php"
+        ]
+    }
+}
