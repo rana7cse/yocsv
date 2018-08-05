@@ -7,12 +7,12 @@ return [
     /*
      * File path to load csv file
      * */
-    'path' => null,
+    'read' => path("source/school.csv"),
 
     /*
      * File name to load csv file
      * */
-    'file_name' => null,
+    'write' => null,
 
     /*
      * map csv to import in database table

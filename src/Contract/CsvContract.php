@@ -6,12 +6,11 @@
  * Time: 1:41 AM
  */
 
-namespace Rana\YoCsvPHP;
+namespace Rana\YoCsvPHP\Contract;
 
 
 interface CsvContract
 {
-    public function loadFile();
 
     public function getData();
 

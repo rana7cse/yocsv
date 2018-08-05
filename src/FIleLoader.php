@@ -15,88 +15,93 @@ use Rana\YoCsvPHP\Exceptions\InvalidFileExtensionException;
 class FIleLoader
 {
     /*
-     * @property to set file name
-     * ---------------------------
-     * @function setName($name)
-     * @function getName()
-     * */
-
-    protected $name = null;
-
-    /*
-     * @property to set a path
+     * @var $path to set a path
      * ------------------------
-     * @function setPath($path)
-     * @function getPath()
      * */
-    protected $path = null;
+    protected $path;
 
     /*
-     * @property to set file resource if open
-     * --------------------------------------
-     * @function setResource($resource)
-     * @function getResource()
+     * @var $resource to set file resource if open
+     * -------------------------------------------
      * */
-    protected $resource = null;
+    protected $resource;
 
     /*
-     * @property to set file open mode if open
-     * ---------------------------------------
-     * @function setMode()
-     * @function getMode()
+     * @var $info to store file information
+     * ------------------------------------
      * */
-    protected $mode = null;
+    protected $info;
 
 
     /**
      * FIleLoader constructor.
      * @param $path
-     * @param $fileName
+     * @throws FileNotFoundException
+     * @throws \Exception
      */
-    public function __construct($path = null, $fileName = null)
+    public function __construct($path = null)
     {
-        $this->path = $path;
-        $this->name = $fileName;
+        if (blank($path)) {
+            $this->setPathFromConfig();
+        } else {
+            $this->path = $path;
+        }
+
+        if (!$this->exists($this->path)){
+            throw new FileNotFoundException;
+        }
+
+        $this->info = $this->getFilePathInfo();
     }
 
     /**
-     * @param $mode
+     * @throws \Exception
+     */
+    public function setPathFromConfig()
+    {
+        $this->path = yoConfig('read');
+    }
+
+    /**
+     * @param $path
+     * @return bool
+     */
+    private function exists($path) : bool
+    {
+        return file_exists($path);
+    }
+
+    /**
+     * @return array
+     */
+    private function getFilePathInfo() : array
+    {
+        return pathinfo($this->path);
+    }
+
+    /**
+     * @param null $path
      * @return FIleLoader
      * @throws FileNotFoundException
      * @throws InvalidFileExtensionException
      */
-    public function openFile($mode) : FIleLoader
+    public function readFile($path = null) : FIleLoader
     {
-        $fileName = $this->path.$this->name;
+        if (!blank($path)){
+            $this->path = $path;
+        }
 
-        if (!file_exists($fileName)){
+        if (!$this->exists($this->path)){
             throw new FileNotFoundException;
         }
 
-        $pathInfo = pathinfo($fileName);
-
-        if(!in_array("csv",$pathInfo)){
+        if(!in_array("csv", $this->info)){
             throw new InvalidFileExtensionException;
         }
 
-        $this->resource = fopen($fileName,$mode);
+        $this->resource = fopen($this->path,'r');
 
         return $this;
-    }
-
-    /**
-     * @return mixed
-     * @throws FileNotFoundException
-     */
-    public function getFileInfo() : array
-    {
-        $fileName = $this->path.$this->name;
-
-        if (!file_exists($fileName)){
-            throw new FileNotFoundException;
-        }
-
-        return pathinfo($fileName);
     }
 
     /**
@@ -104,21 +109,17 @@ class FIleLoader
      * @throws FileNotFoundException
      * @throws InvalidFileExtensionException
      */
-    public function getFileContent() : string
+    public function getContent() : string
     {
-        $fileName = $this->path.$this->name;
-
-        if (!file_exists($fileName)){
+        if (!file_exists($this->path)){
             throw new FileNotFoundException;
         }
 
-        $pathInfo = pathinfo($fileName);
-
-        if(!in_array("csv",$pathInfo)){
+        if(!in_array("csv",$this->info)){
             throw new InvalidFileExtensionException;
         }
 
-        return file_get_contents($fileName);
+        return file_get_contents($this->path);
     }
 
     /**
