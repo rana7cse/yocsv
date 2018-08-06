@@ -11,9 +11,11 @@ namespace Rana\YoCsvPHP;
 
 use Rana\YoCsvPHP\Exceptions\FileNotFoundException;
 use Rana\YoCsvPHP\Exceptions\InvalidFileExtensionException;
+use Rana\YoCsvPHP\Traits\SettersAndGettersTrait;
 
 class FIleLoader
 {
+    use SettersAndGettersTrait;
     /*
      * @var $path to set a path
      * ------------------------
@@ -128,45 +130,5 @@ class FIleLoader
     public function closeFile() : bool
     {
         return fclose($this->resource);
-    }
-
-    /**
-     * @param $funcName
-     * @param $parameter
-     * @return $this
-     */
-    public function __call($funcName, $parameter)
-    {
-        if (method_exists(static::class,$funcName)){
-
-            return call_user_func_array([$this,$funcName],$parameter);
-
-        } elseif (preg_match("#set[A-Z*|a-z*]#",$funcName)){
-            $properTyName = strtolower(str_replace("set","",$funcName));
-            if (is_null($properTyName)){
-                throw new \RuntimeException("setter should contain some letter after set keyword");
-            }
-
-            if (!property_exists(static::class,$properTyName)){
-                throw new \RuntimeException("Setter property dose not exist");
-            }
-            $this->{$properTyName} = $parameter[0];
-
-            return $this;
-
-        } elseif (preg_match("#get[A-Z*|a-z*]#",$funcName)) {
-            $methodName = strtolower(str_replace("get","",$funcName));
-            if (is_null($methodName)){
-                throw new \RuntimeException("getters should contain some letter after set keyword");
-            }
-
-            if (!property_exists(static::class,$methodName)){
-                throw new \RuntimeException("Getter should have a property dose not exist");
-            }
-
-            return $this->{$methodName};
-        } else {
-            throw new \RuntimeException("Method Not Found");
-        }
     }
 }

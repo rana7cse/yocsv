@@ -47,15 +47,13 @@ class CsvReader implements CsvContract
     /**
      * @throws \Exception
      */
-    public function readCsv()
+    public function readCsv() : CsvReader
     {
         $this->data = $this->eachRow(function ($e){
             return $e;
         });
         return $this;
     }
-
-
 
     /**
      * @return $this
@@ -69,7 +67,10 @@ class CsvReader implements CsvContract
         return $this;
     }
 
-    public function getCsvRow()
+    /**
+     * @return array
+     */
+    public function getCsvRow() : array
     {
         return fgetcsv($this->fileLoader->getResource());
     }
@@ -79,7 +80,7 @@ class CsvReader implements CsvContract
      * @return array
      * @throws \Exception
      */
-    public function eachRow(callable $callback)
+    public function eachRow(callable $callback) : array
     {
         if (!$callback instanceof \Closure){
             throw new \Exception("First argument should be a closure");
@@ -106,7 +107,7 @@ class CsvReader implements CsvContract
     /**
      * @throws \Exception
      */
-    public function getData()
+    public function getData() : array
     {
         $this->readCsv();
         return $this->data;
