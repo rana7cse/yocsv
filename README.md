@@ -26,7 +26,7 @@ $data = $csv->firstRowAsTitle()->get(); // return an array of all data
 
 This package also allow you iterate over individual row. To do this type of iteration call `$csv->each(callback)` method that's take an argument as callback like below
 ```php
-    $csv->each(function($row){
-        // you will get data from $row
-    });
+$csv->each(function($row){
+    // you will get data from $row
+});
 ```
