@@ -12,6 +12,6 @@ namespace Rana\YoCsvPHP\Contract;
 interface CsvContract
 {
 
-    public function getData();
+    public function get();
 
 }

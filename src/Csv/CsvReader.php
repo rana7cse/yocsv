@@ -6,7 +6,7 @@
  * Time: 1:44 AM
  */
 
-namespace Rana\YoCsvPHP;
+namespace Rana\YoCsvPHP\Csv;
 
 
 use Rana\YoCsvPHP\Contract\CsvContract;
@@ -28,31 +28,19 @@ class CsvReader implements CsvContract
      * */
     private $title;
 
-    /**
-     * CsvReader constructor.
-     * @param FIleLoader $fileLoader
-     * @throws Exceptions\FileNotFoundException
-     * @throws Exceptions\InvalidFileExtensionException
-     */
-    public function __construct($fileLoader = null)
+    public function __construct($path,$option = [])
     {
-        if ($fileLoader instanceof FIleLoader){
-            $this->fileLoader = $fileLoader;
-        } else {
-            $this->fileLoader = new FIleLoader();
-        }
-        $this->fileLoader->readFile();
+        $this->fileLoader = new FIleLoader($path);
     }
 
     /**
      * @throws \Exception
      */
-    public function readCsv() : CsvReader
+    private function loadData()
     {
-        $this->data = $this->eachRow(function ($e){
+        $this->eachRow(function ($e){
             return $e;
         });
-        return $this;
     }
 
     /**
@@ -60,7 +48,7 @@ class CsvReader implements CsvContract
      */
     public function firstRowAsTitle() : CsvReader
     {
-        while ($title = $this->getCsvRow()){
+        while ($title = $this->getCsvRowFromFile()){
             $this->title = $title;
             break;
         }
@@ -70,26 +58,37 @@ class CsvReader implements CsvContract
     /**
      * @return array
      */
-    public function getCsvRow() : array
+    public function getCsvRowFromFile()
     {
         return fgetcsv($this->fileLoader->getResource());
     }
 
     /**
      * @param callable $callback
-     * @return array
+     * @return CsvReader
      * @throws \Exception
      */
-    public function eachRow(callable $callback) : array
+    public function eachRow(callable $callback) : CsvReader
     {
         if (!$callback instanceof \Closure){
             throw new \Exception("First argument should be a closure");
         }
-        $data = [];
-        while ($row = $this->getCsvRow()){
-            $data[] = $callback($this->combineRowToTitle($row));
+        $this->data = [];
+        while ($row = $this->getCsvRowFromFile()){
+            $this->data[] = $callback($this->combineRowToTitle($row));
         }
-        return $data;
+        return $this;
+    }
+
+    public function each(callable $callback):CsvReader
+    {
+        if (blank($this->data)){
+            $this->loadData();
+        }
+        foreach ($this->data as $row){
+            $callback($row);
+        }
+        return $this;
     }
 
     /**
@@ -107,9 +106,11 @@ class CsvReader implements CsvContract
     /**
      * @throws \Exception
      */
-    public function getData() : array
+    public function get() : array
     {
-        $this->readCsv();
+        if (blank($this->data)){
+            $this->loadData();
+        }
         return $this->data;
     }
 }

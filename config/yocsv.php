@@ -3,11 +3,11 @@
  * configuration for yo csv is here
  * */
 return [
-    'debug' => false,
+    'debug' => true,
     /*
      * File path to load csv file
      * */
-    'read' => path("source/school.csv"),
+    'root' => __DIR__.DIRECTORY_SEPARATOR."..",
 
     /*
      * File name to load csv file

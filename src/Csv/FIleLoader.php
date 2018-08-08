@@ -6,7 +6,7 @@
  * Time: 1:45 AM
  */
 
-namespace Rana\YoCsvPHP;
+namespace Rana\YoCsvPHP\Csv;
 
 
 use Rana\YoCsvPHP\Exceptions\FileNotFoundException;
@@ -54,6 +54,7 @@ class FIleLoader
         }
 
         $this->info = $this->getFilePathInfo();
+        $this->readFile();
     }
 
     /**

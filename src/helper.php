@@ -55,21 +55,23 @@ if (!function_exists('dd')){
     /**
      * @param $param
      */
-    function dd($param){
-        print_r($param);
+    function ddx($param){
+        dump($param);
         die();
     }
 }
 
 if (!function_exists('path')){
     /**
-     * @param null $path
+     * @param null $file_path
      * @return string
+     * @throws Exception
      */
-    function path($path = null){
-        if (!blank($path)){
-            return __DIR__.DIRECTORY_SEPARATOR.$path;
+    function source_path($file_path = null){
+        $source = yoConfig('root').DIRECTORY_SEPARATOR."source";
+        if (!blank($file_path)){
+            return $source.DIRECTORY_SEPARATOR.$file_path;
         }
-        return __DIR__;
+        return $source;
     }
 }
