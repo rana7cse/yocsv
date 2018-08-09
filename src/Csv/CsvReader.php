@@ -28,12 +28,22 @@ class CsvReader implements CsvContract
      * */
     private $title;
 
-    public function __construct($path,$option = [])
+
+    /**
+     * CsvReader constructor.
+     * initialize csv Reader instance
+     * to pass file path argument and option (optionally)
+     * @param $path
+     * @param array $option
+     * @throws \Rana\YoCsvPHP\Exceptions\FileNotFoundException
+     */
+    public function __construct($path, $option = [])
     {
         $this->fileLoader = new FIleLoader($path);
     }
 
     /**
+     * Load data to load all csv data into  $data @property
      * @throws \Exception
      */
     private function loadData()
@@ -44,6 +54,7 @@ class CsvReader implements CsvContract
     }
 
     /**
+     * This method set $this title variable to first csv row
      * @return $this
      */
     public function firstRowAsTitle() : CsvReader
@@ -56,6 +67,7 @@ class CsvReader implements CsvContract
     }
 
     /**
+     * Get csv row from file resource instance
      * @return array
      */
     public function getCsvRowFromFile()
