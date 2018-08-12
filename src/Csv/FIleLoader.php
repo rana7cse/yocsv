@@ -69,7 +69,7 @@ class FIleLoader
      * @param $path
      * @return bool
      */
-    private function exists($path) : bool
+    private function exists($path)
     {
         return file_exists($path);
     }
@@ -77,7 +77,7 @@ class FIleLoader
     /**
      * @return array
      */
-    private function getFilePathInfo() : array
+    private function getFilePathInfo()
     {
         return pathinfo($this->path);
     }
@@ -88,7 +88,7 @@ class FIleLoader
      * @throws FileNotFoundException
      * @throws InvalidFileExtensionException
      */
-    public function readFile($path = null) : FIleLoader
+    public function readFile($path = null)
     {
         if (!blank($path)){
             $this->path = $path;
@@ -112,7 +112,7 @@ class FIleLoader
      * @throws FileNotFoundException
      * @throws InvalidFileExtensionException
      */
-    public function getContent() : string
+    public function getContent()
     {
         if (!file_exists($this->path)){
             throw new FileNotFoundException;
@@ -128,7 +128,7 @@ class FIleLoader
     /**
      * @return bool
      */
-    public function closeFile() : bool
+    public function closeFile()
     {
         return fclose($this->resource);
     }

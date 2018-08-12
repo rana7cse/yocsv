@@ -57,7 +57,7 @@ class CsvReader implements CsvContract
      * This method set $this title variable to first csv row
      * @return $this
      */
-    public function firstRowAsTitle() : CsvReader
+    public function firstRowAsTitle()
     {
         while ($title = $this->getCsvRowFromFile()){
             $this->title = $title;
@@ -80,7 +80,7 @@ class CsvReader implements CsvContract
      * @return CsvReader
      * @throws \Exception
      */
-    public function eachRow(callable $callback) : CsvReader
+    public function eachRow(callable $callback)
     {
         if (!$callback instanceof \Closure){
             throw new \Exception("First argument should be a closure");
@@ -92,7 +92,7 @@ class CsvReader implements CsvContract
         return $this;
     }
 
-    public function each(callable $callback):CsvReader
+    public function each(callable $callback)
     {
         if (blank($this->data)){
             $this->loadData();
@@ -107,7 +107,7 @@ class CsvReader implements CsvContract
      * @param $row
      * @return array
      */
-    private function combineRowToTitle($row) : array
+    private function combineRowToTitle($row)
     {
         if (!blank($this->title)){
             return array_combine($this->title,$row);
@@ -118,7 +118,7 @@ class CsvReader implements CsvContract
     /**
      * @throws \Exception
      */
-    public function get() : array
+    public function get()
     {
         if (blank($this->data)){
             $this->loadData();

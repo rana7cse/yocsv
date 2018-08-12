@@ -1,5 +1,5 @@
 {
-    "name": "msrana/yo-csv-php",
+    "name": "msrana/yocsv",
     "description": "CSV easy import and export with php",
     "keywords": ["csv", "php-csv"],
     "license": "MIT",
