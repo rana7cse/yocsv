@@ -125,4 +125,16 @@ class CsvReader implements CsvContract
         }
         return $this->data;
     }
+
+    public function chunk($fn,$chunk = 800)
+    {
+        $all = array_chunk($this->get(),$chunk);
+        $count = 0;
+        foreach ($all as $index => $data){
+            $count += count($data);
+            $fn($data,$count);
+        }
+    }
+
+
 }
