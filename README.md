@@ -5,7 +5,7 @@
 ## Installation
 Just add this package to your `composer.json` file to write this command.
 ```
-composer require rana7cse/yocsv
+composer require msrana/yocsv
 ```
 
 ## Basic usage to read a csv file
