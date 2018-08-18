@@ -4,8 +4,55 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bb96cb89bb77fc781b088f0c50f01ae2",
-    "packages": [],
+    "content-hash": "38ea8d099fb9f231e74af3375ecd0d5b",
+    "packages": [
+        {
+            "name": "nahid/jsonq",
+            "version": "v5.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nahid/jsonq.git",
+                "reference": "4dd9f8c5d2ab1f0929613a778cfaa9b6decb362d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nahid/jsonq/zipball/4dd9f8c5d2ab1f0929613a778cfaa9b6decb362d",
+                "reference": "4dd9f8c5d2ab1f0929613a778cfaa9b6decb362d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8 || ^5.0",
+                "symfony/var-dumper": "^3.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Nahid\\JsonQ\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "CC-BY-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Nahid Bin Azhar",
+                    "email": "nahid.dns@gmail.com"
+                }
+            ],
+            "description": "JsonQ is a PHP based json data query library",
+            "homepage": "https://github.com/nahid/jsonq",
+            "keywords": [
+                "json",
+                "jsonq",
+                "query"
+            ],
+            "time": "2018-06-27T08:32:40+00:00"
+        }
+    ],
     "packages-dev": [
         {
             "name": "doctrine/instantiator",

@@ -1,12 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: msrana
- * Date: 8/4/18
- * Time: 1:04 AM
- */
-
-namespace Rana\YoCsvPHP\Exceptions;
+namespace MsRana\YoCsv\Exceptions;
 
 
 class ResourceNotExistException extends \Exception

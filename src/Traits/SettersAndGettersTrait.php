@@ -1,13 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: msrana
- * Date: 8/6/18
- * Time: 11:46 PM
- */
+namespace MsRana\YoCsv\Traits;
 
-namespace Rana\YoCsvPHP\Traits;
 
+use MsRana\YoCsv\Exceptions\InvalidSetterOperation;
+use MsRana\YoCsv\Exceptions\PropertyDoseNotExists;
 
 trait SettersAndGettersTrait
 {
@@ -15,14 +11,16 @@ trait SettersAndGettersTrait
      * @param $funcName
      * @param $parameter
      * @return mixed|SettersAndGettersTrait
+     * @throws InvalidSetterOperation
+     * @throws PropertyDoseNotExists
      */
     public function __call($funcName, $parameter)
     {
-        if (method_exists(static::class,$funcName)){
+        if (method_exists(static::class, $funcName)){
             return $this->$funcName(...$parameter);
         }
 
-        if (preg_match("#set[A-Z*|a-z*]#",$funcName)){
+        if (preg_match("#set[A-Z*|a-z*]#", $funcName)){
             return $this->setupSetter($funcName,$parameter);
         }
 
@@ -30,23 +28,25 @@ trait SettersAndGettersTrait
             return $this->setUpGetter($funcName);
         }
 
-        throw new \RuntimeException("Method Not Found");
+        throw new \BadMethodCallException(" Method : [ $funcName ] not exists in Class : [".static::class."]");
     }
 
     /**
      * @param $funcName
      * @param $param
      * @return $this
+     * @throws InvalidSetterOperation
+     * @throws PropertyDoseNotExists
      */
     private function setupSetter($funcName, $param)
     {
-        $propName = strtolower(str_replace("set","",$funcName));
+        $propName = strtolower(str_replace("set", "", $funcName));
         if (is_null($propName)){
-            throw new \RuntimeException("setter should contain some letter after set keyword");
+            throw new InvalidSetterOperation();
         }
 
-        if (!property_exists(static::class,$propName)){
-            throw new \RuntimeException("Setter property dose not exist");
+        if (!property_exists(static::class, $propName)){
+            throw new PropertyDoseNotExists(static::class,$propName);
         }
         $this->{$propName} = $param[0];
 

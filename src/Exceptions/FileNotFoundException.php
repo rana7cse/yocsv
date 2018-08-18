@@ -1,12 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: msrana
- * Date: 8/4/18
- * Time: 1:01 AM
- */
-
-namespace Rana\YoCsvPHP\Exceptions;
+namespace MsRana\YoCsv\Exceptions;
 
 
 class FileNotFoundException extends \Exception
