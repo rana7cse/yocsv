@@ -12,7 +12,8 @@
     ],
     "require": {
         "php": ">=7.0",
-        "nahid/jsonq": "^5.2"
+        "nahid/jsonq": "^5.2",
+        "league/csv": "^9.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8 || ^5.0",
@@ -21,10 +22,7 @@
     "autoload" : {
         "psr-4": {
             "MsRana\\YoCsv\\": "src/"
-        },
-        "files": [
-            "src/helper.php"
-        ]
+        }
     },
     "scripts": {
         "yo": [
