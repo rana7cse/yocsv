@@ -26,7 +26,7 @@ $csv->get(); // return all data row as array
 ```
 
 This package also allow you to apply query/filters like as orm. We use [jsonq](https://github.com/nahid/jsonq) package to inherit it's query functionality on csv file.
-It's will be really useful for us to read [JsonQ documentation](https://github.com/nahid/jsonq) from here.
+Please read [JsonQ documentation](https://github.com/nahid/jsonq) and their apis to apply query on csv :D.
 ```php
 $csv->where('key',$value);
 $csv->get(); // show result
