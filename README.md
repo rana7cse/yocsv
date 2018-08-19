@@ -1,6 +1,6 @@
 # yocsv
 
-**YoCsv** is a simple php package to manipulate `csv` files and apply query on it's data like [jsonq](https://github.com/nahid/jsonq). This package also allow you to transform your expected data.
+**YoCsv** is a simple php package to manipulate `csv` files and apply query on it's data like [php-jsonq](https://github.com/nahid/jsonq). This package also allow you to transform your expected data.
 
 ## Installation
 Just add this package to your `composer.json` file to write this command.
@@ -25,8 +25,8 @@ $csv->read("file.csv");
 $csv->get(); // return all data row as array
 ```
 
-This package also allow you to apply query/filters like as orm. We use [jsonq](https://github.com/nahid/jsonq) package to inherit it's query functionality on csv file.
-Please read [JsonQ documentation](https://github.com/nahid/jsonq) and their apis to apply query on csv :D.
+This package also allow you to apply query/filters like as orm. We use [php-jsonq](https://github.com/nahid/jsonq) package to inherit it's query functionality on csv file.
+Please read [php-jsonq documentation](https://github.com/nahid/jsonq) and their apis to apply query on csv :D.
 ```php
 $csv->where('key',$value);
 $csv->get(); // show result
