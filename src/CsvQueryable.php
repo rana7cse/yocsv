@@ -19,7 +19,7 @@ trait CsvQueryable
      * @throws FileNotFoundException
      * @throws InvalidFileExtensionException
      */
-    public function import($file)
+    public function import($file = null)
     {
         if (!file_exists($file)){
             throw new FileNotFoundException();
