@@ -37,5 +37,5 @@ $csv->get(); // show result
 * [nahid/jsonq](https://github.com/nahid/jsonq)
 
 ## Credit
-* [Shipu Ahamed](https://github.com/shipu) [guti korse]
-* [Nahid Bin Azhar](https://github.com/nahid) [fasai dise]
+* [Shipu Ahamed](https://github.com/shipu)
+* [Nahid Bin Azhar](https://github.com/nahid)
